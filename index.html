@@ -2,87 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Resume Builder</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>AI Resume Builder (No Experience Needed)</h1>
 
-  <nav>
-    <h2>AI Resume Builder</h2>
-    <a href="#">Home</a>
-    <a href="#">Build Resume</a>
-    <a href="#">Contact</a>
-  </nav>
-
-  <main>
-    <h1>Build Your Resume</h1>
-    <p>Fill in the form below and let AI generate your resume!</p>
-
+    <!-- Form Section -->
     <form id="resumeForm">
       <label for="name">Full Name:</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" placeholder="John Doe" required />
 
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" name="email" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="john@example.com" required />
+
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" placeholder="+91 1234567890" />
 
       <label for="education">Education:</label>
-      <textarea id="education" name="education" rows="4" required></textarea>
+      <textarea id="education" placeholder="10th, 12th, College/Online Courses" required></textarea>
 
-      <label for="skills">Skills (comma-separated):</label>
-      <input type="text" id="skills" name="skills" required />
+      <label for="skills">Skills:</label>
+      <textarea id="skills" placeholder="HTML, CSS, Communication, Leadership" required></textarea>
 
-      <label for="projects">Projects / Internships:</label>
-      <textarea id="projects" name="projects" rows="4"></textarea>
-
-      <label for="goal">Career Goal:</label>
-      <textarea id="goal" name="goal" rows="3"></textarea>
+      <label for="projects">Projects:</label>
+      <textarea id="projects" placeholder="Simple Portfolio Website, To-Do List App, etc."></textarea>
 
       <button type="submit">Generate Resume</button>
     </form>
 
-    <div
-      id="resumePreview"
-      style="display: none; margin-top: 40px;"
-    >
-      <h2>Your AI-Generated Resume</h2>
-      <div
-        id="resumeOutput"
-        style="
-          background: #fff;
-          padding: 20px;
-          border: 1px solid #ccc;
-          border-radius: 10px;
-        "
-      ></div>
-    </div>
-  </main>
+    <!-- Resume Preview Section -->
+    <div id="resumeOutput" class="resume-preview"></div>
 
-  <script>
-    const form = document.getElementById('resumeForm');
-    const resumePreview = document.getElementById('resumePreview');
-    const resumeOutput = document.getElementById('resumeOutput');
+    <!-- PDF Download Button -->
+    <button id="downloadBtn">Download as PDF</button>
+  </div>
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault(); // Stop the page from reloading
-
-      const name = form.name.value;
-      const email = form.email.value;
-      const education = form.education.value;
-      const skills = form.skills.value;
-      const projects = form.projects.value;
-      const goal = form.goal.value;
-
-      resumeOutput.innerHTML = `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Career Goal:</strong><br>${goal}</p>
-        <p><strong>Education:</strong><br>${education}</p>
-        <p><strong>Skills:</strong> ${skills}</p>
-        <p><strong>Projects / Internships:</strong><br>${projects}</p>
-      `;
-
-      resumePreview.style.display = 'block';
-    });
-  </script>
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
