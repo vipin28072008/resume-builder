@@ -1,0 +1,30 @@
+// Wait for the page to load
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the form and preview section
+  const form = document.getElementById('resumeForm');
+  const previewSection = document.getElementById('resumePreview');
+  const output = document.getElementById('resumeOutput');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Stop form from refreshing page
+
+    // Get values from form inputs
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const skills = document.getElementById('skills').value.trim();
+    const summary = document.getElementById('summary').value.trim();
+
+    // Create resume preview HTML
+    output.innerHTML = `
+      <h2>${name}</h2>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Summary:</strong><br>${summary}</p>
+      <p><strong>Skills:</strong><br>${skills.replace(/,/g, ', ')}</p>
+    `;
+
+    // Show the preview box
+    previewSection.style.display = 'block';
+  });
+});
