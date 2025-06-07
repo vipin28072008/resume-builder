@@ -1,30 +1,50 @@
-// Wait for the page to load
-document.addEventListener('DOMContentLoaded', function () {
-  // Get the form and preview section
-  const form = document.getElementById('resumeForm');
-  const previewSection = document.getElementById('resumePreview');
-  const output = document.getElementById('resumeOutput');
+// Handle form submission
+document.getElementById('resumeForm').addEventListener('submit', function (e) {
+  e.preventDefault(); // Prevent form from refreshing the page
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault(); // Stop form from refreshing page
+  // Get user input
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const education = document.getElementById('education').value;
+  const skills = document.getElementById('skills').value;
+  const projects = document.getElementById('projects').value;
 
-    // Get values from form inputs
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const skills = document.getElementById('skills').value.trim();
-    const summary = document.getElementById('summary').value.trim();
-
-    // Create resume preview HTML
-    output.innerHTML = `
+  // Create resume preview HTML
+  const resumeHTML = `
+    <div class="resume">
       <h2>${name}</h2>
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Summary:</strong><br>${summary}</p>
-      <p><strong>Skills:</strong><br>${skills.replace(/,/g, ', ')}</p>
-    `;
 
-    // Show the preview box
-    previewSection.style.display = 'block';
-  });
+      <h3>Education</h3>
+      <p>${education.replace(/\n/g, "<br>")}</p>
+
+      <h3>Skills</h3>
+      <ul>
+        ${skills.split(',').map(skill => `<li>${skill.trim()}</li>`).join('')}
+      </ul>
+
+      <h3>Projects</h3>
+      <p>${projects.replace(/\n/g, "<br>")}</p>
+    </div>
+  `;
+
+  // Show the resume in the output area
+  document.getElementById('resumeOutput').innerHTML = resumeHTML;
+});
+
+// Handle PDF download
+document.getElementById('downloadBtn').addEventListener('click', function () {
+  const element = document.getElementById('resumeOutput');
+
+  const opt = {
+    margin: 0.5,
+    filename: 'My_Resume.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save();
 });
