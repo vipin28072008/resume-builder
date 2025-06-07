@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Resume Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <h2>AI Resume Builder</h2>
+    <a href="#">Home</a>
+    <a href="#">Build Resume</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <main>
+    <h1>Build Your Resume</h1>
+    <p>Fill in the form below and let AI generate your resume!</p>
+
+    <form id="resumeForm">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="education">Education:</label>
+      <textarea id="education" name="education" rows="4" required></textarea>
+
+      <label for="skills">Skills (comma-separated):</label>
+      <input type="text" id="skills" name="skills" required />
+
+      <label for="projects">Projects / Internships:</label>
+      <textarea id="projects" name="projects" rows="4"></textarea>
+
+      <label for="goal">Career Goal:</label>
+      <textarea id="goal" name="goal" rows="3"></textarea>
+
+      <button type="submit">Generate Resume</button>
+    </form>
+
+    <div
+      id="resumePreview"
+      style="display: none; margin-top: 40px;"
+    >
+      <h2>Your AI-Generated Resume</h2>
+      <div
+        id="resumeOutput"
+        style="
+          background: #fff;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+        "
+      ></div>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('resumeForm');
+    const resumePreview = document.getElementById('resumePreview');
+    const resumeOutput = document.getElementById('resumeOutput');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // Stop the page from reloading
+
+      const name = form.name.value;
+      const email = form.email.value;
+      const education = form.education.value;
+      const skills = form.skills.value;
+      const projects = form.projects.value;
+      const goal = form.goal.value;
+
+      resumeOutput.innerHTML = `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Career Goal:</strong><br>${goal}</p>
+        <p><strong>Education:</strong><br>${education}</p>
+        <p><strong>Skills:</strong> ${skills}</p>
+        <p><strong>Projects / Internships:</strong><br>${projects}</p>
+      `;
+
+      resumePreview.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
